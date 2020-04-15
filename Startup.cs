@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using ColdFrame.Data;
 using ColdFrame.Models;
+using ColdFrame.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,6 +48,8 @@ namespace ColdFrame
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddScoped<IPlantsRepo, PlantsRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

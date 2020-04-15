@@ -11,7 +11,7 @@ namespace ColdFrame.Repositories
         Plant Create(CreatePlantRequest newPlant);
         Plant Update(int id, UpdatePlantRequest update);
         void Delete(int id);
-        Plant Where(string PlantnameQuery);
+        Plant Where(string plantNameQuery);
     }
 
     
@@ -24,30 +24,54 @@ namespace ColdFrame.Repositories
             return _applicationDbContext.Plants
                 .Single(plant => plant.Id == id);
         }
-
+        
         public Plant Create(CreatePlantRequest newPlant)
         {
-
-            var insertResponse = Plants.Add(new Plant
+            var insertResponse = _applicationDbContext.Plants.Add(new Plant
             {
-                PlantName = newPlant.
+                PlantName = newPlant.PlantName,
                 Description = newPlant.Description,
-                Vegetable = newPlant.Email,
-                Fruit = newPlant.Plantname,
-                Sow = newPlant.
-                ImageUrl = newPlant.ProfileImageUrl,
+                Vegetable = newPlant.Vegetable,
+                Fruit = newPlant.Fruit,
+                SowFrom = newPlant.SowFrom,
+                SowTo = newPlant.SowTo,
+                HarvestFrom = newPlant.HarvestFrom,
+                HarvestTo = newPlant.HarvestTo,
+                ImageUrl = newPlant.ImageUrl
             });
-            SaveChanges();
+            _applicationDbContext.SaveChanges();
 
             return insertResponse.Entity;
+        }
+
+        public Plant Update(int id, UpdatePlantRequest update)
+        {
+            var plant = GetById(id);
+
+            plant.PlantName = update.PlantName;
+            plant.Description = update.Description;
+            plant.Vegetable = update.Vegetable;
+            plant.Fruit = update.Fruit;
+            plant.SowFrom = update.SowFrom;
+            plant.SowTo = update.SowTo;
+            plant.HarvestFrom = update.HarvestFrom;
+            plant.HarvestTo = update.HarvestTo;
+            plant.ImageUrl = update.ImageUrl;
+
+            _applicationDbContext.Plants.Update(plant);
+            _applicationDbContext.SaveChanges();
+
+            return plant;
+            
         }
 
         public void Delete(int id)
         {
             var Plant = GetById(id);
-            Plants.Remove(Plant);
-            SaveChanges();
+            _applicationDbContext.Plants.Remove(Plant);
+            _applicationDbContext.SaveChanges();
         }
+        
 
         public Plant Where(string plantNameQuery)
         {
