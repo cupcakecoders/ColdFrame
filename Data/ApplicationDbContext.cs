@@ -17,5 +17,8 @@ namespace ColdFrame.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+        
+        public DbSet<Plant> Plants { get; set; }
     }
+    
 }
