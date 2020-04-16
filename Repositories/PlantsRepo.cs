@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ColdFrame.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -7,6 +8,7 @@ namespace ColdFrame.Repositories
 {
     public interface IPlantsRepo
     {
+        IEnumerable<Plant> GetAll();
         Plant GetById(int id);
         Plant Create(CreatePlantRequest newPlant);
         Plant Update(int id, UpdatePlantRequest update);
@@ -14,11 +16,15 @@ namespace ColdFrame.Repositories
         Plant Where(string plantNameQuery);
     }
 
-    
     public class PlantsRepo : IPlantsRepo
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        
+
+        public IEnumerable<Plant> GetAll()
+        {
+            return _applicationDbContext.Set<Plant>().ToList();
+            
+        }
         public Plant GetById(int id)
         {
             return _applicationDbContext.Plants
@@ -67,8 +73,8 @@ namespace ColdFrame.Repositories
 
         public void Delete(int id)
         {
-            var Plant = GetById(id);
-            _applicationDbContext.Plants.Remove(Plant);
+            var plant = GetById(id);
+            _applicationDbContext.Plants.Remove(plant);
             _applicationDbContext.SaveChanges();
         }
         
