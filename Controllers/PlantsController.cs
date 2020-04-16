@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using ColdFrame.Models;
 using ColdFrame.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +11,22 @@ namespace ColdFrame.Controllers
     public class PlantsController : ControllerBase
     {
         private readonly IPlantsRepo _plants;
-
+        
         public PlantsController(IPlantsRepo plants)
         {
             _plants = plants;
         }
 
+        [HttpGet]
+        [Route("")]
+        public ActionResult<IEnumerable<PlantResponse>> GetAll()
+        {
+            var plants = _plants.GetAll();
+            var plantResponses = plants
+                .Select(plants => new PlantResponse(plants));
+            return plantResponses.ToList();
+        }
+        
         [HttpGet]
         [Route("{id}")]
         public ActionResult<PlantResponse> GetById([FromRoute] int id)
