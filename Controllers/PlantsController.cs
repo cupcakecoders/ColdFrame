@@ -46,7 +46,7 @@ namespace ColdFrame.Controllers
 
             var plant = _plants.Create(newPlant);
 
-            var url = Url.Action("GetById", new {id = plant.Id});
+            var url = Url.Action("GetById", new {id = plant.PlantId});
             var responseViewModel = new PlantResponse(plant);
             return Created(url, responseViewModel);
         }

@@ -11,7 +11,7 @@ namespace ColdFrame.Models
             _plant = plant;
         }
 
-        public int Id => _plant.Id;
+        public int Id => _plant.PlantId;
         public string PlantName => _plant.PlantName;
         public string Description => _plant.Description;
         public bool Vegetable => _plant.Vegetable;

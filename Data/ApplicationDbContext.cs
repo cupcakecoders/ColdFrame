@@ -18,7 +18,5 @@ namespace ColdFrame.Data
         {
         }
         
-        public DbSet<Plant> Plants { get; set; }
     }
-    
 }
