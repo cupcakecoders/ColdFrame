@@ -18,27 +18,27 @@ namespace ColdFrame.Repositories
 
     public class PlantsRepo : IPlantsRepo
     {
-        private readonly PlantDbContext _plantDbContext;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public PlantsRepo(PlantDbContext plantDbContext)
+        public PlantsRepo(ApplicationDbContext applicationDbContext)
         {
-            _plantDbContext = plantDbContext;
+            _applicationDbContext = applicationDbContext;
         }
 
         public IEnumerable<Plant> GetAll()
         {
-            return _plantDbContext.Plants;
+            return _applicationDbContext.Plants;
             
         }
         public Plant GetById(int id)
         {
-            return _plantDbContext.Plants
+            return _applicationDbContext.Plants
                 .Single(plant => plant.PlantId == id);
         }
         
         public Plant Create(CreatePlantRequest newPlant)
         {
-            var insertResponse = _plantDbContext.Plants.Add(new Plant
+            var insertResponse = _applicationDbContext.Plants.Add(new Plant
             {
                 PlantName = newPlant.PlantName,
                 Description = newPlant.Description,
@@ -50,7 +50,7 @@ namespace ColdFrame.Repositories
                 HarvestTo = newPlant.HarvestTo,
                 ImageUrl = newPlant.ImageUrl
             });
-            _plantDbContext.SaveChanges();
+            _applicationDbContext.SaveChanges();
 
             return insertResponse.Entity;
         }
@@ -69,24 +69,23 @@ namespace ColdFrame.Repositories
             plant.HarvestTo = update.HarvestTo;
             plant.ImageUrl = update.ImageUrl;
 
-            _plantDbContext.Plants.Update(plant);
-            _plantDbContext.SaveChanges();
+            _applicationDbContext.Plants.Update(plant);
+            _applicationDbContext.SaveChanges();
 
             return plant;
-            
         }
 
         public void Delete(int id)
         {
             var plant = GetById(id);
-            _plantDbContext.Plants.Remove(plant);
-            _plantDbContext.SaveChanges();
+            _applicationDbContext.Plants.Remove(plant);
+            _applicationDbContext.SaveChanges();
         }
         
 
         public Plant Where(string plantNameQuery)
         {
-            return _plantDbContext.Plants
+            return _applicationDbContext.Plants
                 .SingleOrDefault(plant => plant.PlantName == plantNameQuery);
         }
     }

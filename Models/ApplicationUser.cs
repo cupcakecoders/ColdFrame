@@ -8,6 +8,7 @@ namespace ColdFrame.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public ICollection<PlantUser> PlantUsers { get; set; }
+        public virtual ICollection<Plant> Plants { get; set; }
     }
+    
 }

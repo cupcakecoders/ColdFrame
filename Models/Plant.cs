@@ -8,6 +8,7 @@ namespace ColdFrame.Models
     {
         [Key]
         public int PlantId { get; set; }
+        
         public string PlantName { get; set; }
         public string Description { get; set; }
         public bool Vegetable { get; set; }
@@ -18,6 +19,7 @@ namespace ColdFrame.Models
         public DateTime HarvestTo { get; set; }
         public string ImageUrl { get; set; }
         
-        public ICollection<PlantUser> PlantUsers { get; set; }
+        
+        public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
