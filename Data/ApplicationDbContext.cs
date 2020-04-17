@@ -22,6 +22,9 @@ namespace ColdFrame.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Plant>().HasMany<ApplicationUser>(p => p.ApplicationUsers);
+            modelBuilder.Entity<ApplicationUser>().HasMany<Plant>(u => u.Plants);
         }
     }
 }
