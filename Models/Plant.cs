@@ -18,7 +18,11 @@ namespace ColdFrame.Models
         public DateTime HarvestFrom { get; set; }
         public DateTime HarvestTo { get; set; }
         public string ImageUrl { get; set; }
-        
+
+        public Plant()
+        {
+            this.ApplicationUsers = new HashSet<ApplicationUser>();
+        }
         
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; }
     }

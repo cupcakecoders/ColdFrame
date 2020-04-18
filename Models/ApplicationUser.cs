@@ -8,6 +8,10 @@ namespace ColdFrame.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            this.Plants = new HashSet<Plant>();
+        }
         public virtual ICollection<Plant> Plants { get; set; }
     }
     
