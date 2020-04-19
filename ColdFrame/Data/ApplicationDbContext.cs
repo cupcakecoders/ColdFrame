@@ -19,13 +19,23 @@ namespace ColdFrame.Data
         }
         public DbSet<Plant> Plants { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+                
+            modelBuilder.Entity<PlantUser>()
+                .HasKey(t => new { t.PlantId, t.Id });
 
-            modelBuilder.Entity<Plant>().HasMany<ApplicationUser>(p => p.ApplicationUsers);
-            modelBuilder.Entity<ApplicationUser>().HasMany<Plant>(u => u.Plants);
+            modelBuilder.Entity<PlantUser>()
+                .HasOne(pt => pt.Plant)
+                .WithMany(p => p.PlantUsers)
+                .HasForeignKey(pt => pt.PlantId);
+
+            modelBuilder.Entity<PlantUser>()
+                .HasOne(pt => pt.ApplicationUser)
+                .WithMany(t => t.PlantUsers)
+                .HasForeignKey(pt => pt.Id);
         }
     }
 }

@@ -61,9 +61,6 @@ namespace ColdFrame.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<int?>("PlantId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -83,8 +80,6 @@ namespace ColdFrame.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.HasIndex("PlantId");
-
                     b.ToTable("AspNetUsers");
                 });
 
@@ -94,9 +89,6 @@ namespace ColdFrame.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -127,9 +119,22 @@ namespace ColdFrame.Migrations
 
                     b.HasKey("PlantId");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.ToTable("Plants");
+                });
+
+            modelBuilder.Entity("ColdFrame.Models.PlantUser", b =>
+                {
+                    b.Property<int>("PlantId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.HasKey("PlantId", "Id");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("PlantUser");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -348,18 +353,19 @@ namespace ColdFrame.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ColdFrame.Models.ApplicationUser", b =>
+            modelBuilder.Entity("ColdFrame.Models.PlantUser", b =>
                 {
-                    b.HasOne("ColdFrame.Models.Plant", null)
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("PlantId");
-                });
+                    b.HasOne("ColdFrame.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("PlantUsers")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("ColdFrame.Models.Plant", b =>
-                {
-                    b.HasOne("ColdFrame.Models.ApplicationUser", null)
-                        .WithMany("Plants")
-                        .HasForeignKey("ApplicationUserId");
+                    b.HasOne("ColdFrame.Models.Plant", "Plant")
+                        .WithMany("PlantUsers")
+                        .HasForeignKey("PlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
