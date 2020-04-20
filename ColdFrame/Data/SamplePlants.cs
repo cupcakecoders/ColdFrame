@@ -37,7 +37,6 @@ namespace ColdFrame.Data
                 ImageUrl = _plantData[index][9]
             };
             
-            
         }
     }
 }
