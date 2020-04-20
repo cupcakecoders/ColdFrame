@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ColdFrame.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200419113105_initial")]
+    [Migration("20200419114153_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
