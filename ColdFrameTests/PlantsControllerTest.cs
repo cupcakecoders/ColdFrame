@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using ColdFrame.Data;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -7,8 +8,12 @@ using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic.CompilerServices;
 using NUnit.Framework;
+using ILogger = NUnit.Framework.Internal.ILogger;
 
 namespace ColdFrameTests
 {
@@ -56,6 +61,28 @@ namespace ColdFrameTests
                     {
                         options.UseInMemoryDatabase("InMemoryDbForTesting");
                     });
+
+                var servicesProvider = services.BuildServiceProvider();
+
+                using (var scope = servicesProvider.CreateScope())
+                {
+                    var scopedServices = scope.ServiceProvider;
+                    var db = scopedServices.GetRequiredService<ApplicationDbContext>();
+                    var logger = scopedServices.GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
+
+                    db.Database.EnsureCreated();
+
+                    try
+                    {
+                        Utilities.InitializeDbForTests(db);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "An error occurred seeding the " +
+                                            "database with test messages. Error: {Message}", ex.Message);
+                    }
+
+                }
             });
         }
     }
