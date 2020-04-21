@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.VisualBasic;
 
 namespace ColdFrame.Models
 {
@@ -18,7 +19,6 @@ namespace ColdFrame.Models
         public DateTime HarvestFrom { get; set; }
         public DateTime HarvestTo { get; set; }
         public string ImageUrl { get; set; }
-        
         public virtual ICollection<PlantUser> PlantUsers { get; set; }
     }
 }
