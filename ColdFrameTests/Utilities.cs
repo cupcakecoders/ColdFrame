@@ -1,31 +1,32 @@
 ﻿using System.Collections.Generic;
 using ColdFrame.Data;
+using ColdFrame.Models;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 namespace ColdFrameTests
 {
     public class Utilities
     {
+        
         public static void InitializeDbForTests(ApplicationDbContext db)
         {
-            db.Messages.AddRange(GetSeedingMessages());
+            db.Plants.AddRange(GetSeedingplants());
             db.SaveChanges();
         }
 
         public static void ReinitializeDbForTests(ApplicationDbContext db)
         {
-            db.Messages.RemoveRange(db.Messages);
+            db.Plants.RemoveRange(db.Plants);
             InitializeDbForTests(db);
         }
 
-        public static List<Message> GetSeedingMessages()
+        public static List<Plant> GetSeedingplants()
         {
-            return new List<Message>()
+            return new List<Plant>()
             {
-                new Message(){ Text = "TEST RECORD: You're standing on my scarf." },
-                new Message(){ Text = "TEST RECORD: Would you like a jelly baby?" },
-                new Message(){ Text = "TEST RECORD: To the rational mind, " +
-                                      "nothing is inexplicable; only unexplained." }
+                new Plant(){ PlantName = "TEST apple" },
+                new Plant(){ PlantName = "TEST pear" },
+                new Plant(){ PlantName = "TEST tomato" }
             };
         }
     }
