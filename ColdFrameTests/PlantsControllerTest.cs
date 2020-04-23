@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net.Http;
 using System.Threading.Tasks;
-using ColdFrame;
-using ColdFrame.Controllers;
 using ColdFrame.Data;
 using ColdFrame.Models;
-using ColdFrame.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -22,28 +16,47 @@ namespace ColdFrameTests
     {
         private HttpClient _client;
         private CustomWebApplicationFactory<ColdFrame.Startup> _factory;
-
+        private ApplicationDbContext _applicationDbContext;
+        
         [OneTimeSetUp]
-        public void GivenARequestToTheController()
+        public void Setup()
         {
             _factory = new CustomWebApplicationFactory<ColdFrame.Startup>();
-            _client = _factory.CreateClient();
-            
+            _client = _factory.WithWebHostBuilder(builder =>
+                {
+                    builder.ConfigureServices(services =>
+                    {
+                        var serviceProvider = services.BuildServiceProvider();
+                        var scope = serviceProvider.CreateScope();
+                        var scopedServices = scope.ServiceProvider;
+                        _applicationDbContext = scopedServices.GetRequiredService<ApplicationDbContext>();
+
+                    });
+                }).CreateClient();
         }
         
         [Test]
         public async Task GetAll()
         {
-            //db.Plants.Add(new Plant() {PlantName = "plantscontroller apple"});
+            // Arrange
+            _applicationDbContext.Plants.RemoveRange(_applicationDbContext.Plants);
+            _applicationDbContext.Plants.Add(new Plant() {PlantName = "first plant"});
+            _applicationDbContext.SaveChanges();
+            
+            // Act
             var httpResponse = await _client.GetAsync("/plants");
 
+            // Assert
             // Must be successful.
             httpResponse.EnsureSuccessStatusCode();
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
             var plants = JsonConvert.DeserializeObject<List<Plant>>(stringResponse);
-          //  Assert.Contains(firstPlant, p => p.PlaneName =="TEST tomato");
+            Assert.AreEqual(plants.Count, 1);
+            var firstPlant = plants[0];
+            Assert.AreEqual(firstPlant.PlantName, "first plant");
+            
         }
     }
 }
