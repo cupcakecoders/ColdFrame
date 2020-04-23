@@ -1,5 +1,5 @@
 # Common IntelliJ Platform excludes
-
+/bin
 # User specific
 .idea
 **/.idea/**/workspace.xml
