@@ -37,28 +37,46 @@ namespace ColdFrameTests
         }
         
         [Test]
-        public async Task GetAll()
+        public async Task Create()
         {
             // Arrange
-            ICollection<PlantUser> plantUsersData = new List<PlantUser>();
-            plantUsersData.Add(new PlantUser()
+            var testUser = new ApplicationUser()
             {
-                    Id = "10",
-                    PlantId = 1,
-                    ApplicationUser = 
-            });
-            
-            List<Plant> testPlants = new List<Plant>();
-            //need to specify all field values
-            testPlants.Add(new Plant()
+                Id = "100",
+                UserName = "Test Name",
+                NormalizedEmail = "testname@email.com",
+                Email = "testname@email.com",
+                EmailConfirmed = true,
+                PasswordHash = "hashedpwd",
+                SecurityStamp = "security_stamp",
+                ConcurrencyStamp = "12345",
+                PhoneNumber = "07838 485 456",
+                TwoFactorEnabled = false,
+                LockoutEnd = DateTimeOffset.Now,
+                LockoutEnabled = false,
+                AccessFailedCount = 0,
+            };
+
+            var testPlant = new Plant()
             {
                 PlantId = 10, PlantName = "Potato", Description = "Great potato", Fruit = false, Vegetable = true,
-                SowFrom = DateTime.Now, SowTo = DateTime.Now, HarvestFrom = DateTime.Now, HarvestTo = DateTime.Now, ImageUrl = "ImageLink",
-                PlantUsers = 
-            });
+                SowFrom = DateTime.Now, SowTo = DateTime.Now, HarvestFrom = DateTime.Now, HarvestTo = DateTime.Now,
+                ImageUrl = "ImageLink"
+            };
 
+            testPlant.PlantUsers = new List<PlantUser>()
+            {
+                new PlantUser()
+                {
+                    ApplicationUser = testUser,
+                    Plant = testPlant,
+                }
+            };
+            //Look at clearing the db using dispose method.
             _applicationDbContext.Plants.RemoveRange(_applicationDbContext.Plants);
-            _applicationDbContext.Plants.AddRange(testPlants);
+            _applicationDbContext.ApplicationUsers.RemoveRange(_applicationDbContext.ApplicationUsers);
+
+            _applicationDbContext.Plants.Add(testPlant);
             _applicationDbContext.SaveChanges();
             
             // Act
@@ -72,11 +90,7 @@ namespace ColdFrameTests
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
             var plants = JsonConvert.DeserializeObject<List<Plant>>(stringResponse);
             //Assert.AreEqual(plants.Count, 2);
-            Assert.AreEqual(testPlants.Count, plants.Count);
-            for (var i = 0; i < plants.Count; i++)
-            {
-                Assert.AreEqual(testPlants[i], plants[i]);
-            }        
+              
         }
     }
 }

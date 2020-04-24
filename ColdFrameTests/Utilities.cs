@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using ColdFrame.Data;
 using ColdFrame.Models;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -19,6 +21,7 @@ namespace ColdFrameTests
         public static void ReinitializeDbForTests(ApplicationDbContext db)
         {
             db.Plants.RemoveRange(db.Plants);
+            db.ApplicationUsers.RemoveRange(db.ApplicationUsers);
             InitializeDbForTests(db);
         }
 
@@ -36,7 +39,22 @@ namespace ColdFrameTests
         {
             return new List<ApplicationUser>()
             {
-                new ApplicationUser() {}
+                new ApplicationUser()
+                {
+                 Id   = "100",
+                 UserName = "Test Name",
+                 NormalizedEmail = "testname@email.com",
+                 Email = "testname@email.com",
+                 EmailConfirmed = true,
+                 PasswordHash = "hashedpwd",
+                 SecurityStamp = "security_stamp",
+                 ConcurrencyStamp = "12345",
+                 PhoneNumber = "07838 485 456",
+                 TwoFactorEnabled = false,
+                 LockoutEnd = DateTimeOffset.Now,
+                 LockoutEnabled = false,
+                 AccessFailedCount = 0
+                }
             };
         }
     }
