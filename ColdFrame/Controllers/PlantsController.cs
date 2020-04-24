@@ -32,7 +32,7 @@ namespace ColdFrame.Controllers
         public ActionResult<PlantResponse> GetById([FromRoute] int id)
         {
             var plant = _plants.GetById(id);
-            return new PlantResponse(plant);
+            return new PlantResponse(plant); 
         }
 
         [HttpPost]

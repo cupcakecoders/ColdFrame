@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ColdFrame.Data;
 using ColdFrame.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 namespace ColdFrameTests
@@ -11,6 +12,7 @@ namespace ColdFrameTests
         public static void InitializeDbForTests(ApplicationDbContext db)
         {
             db.Plants.AddRange(GetSeedingplants());
+            db.ApplicationUsers.AddRange(GetSeedingUsers());
             db.SaveChanges();
         }
 
@@ -27,6 +29,14 @@ namespace ColdFrameTests
                 new Plant(){ PlantName = "TEST apple" },
                 new Plant(){ PlantName = "TEST pear" },
                 new Plant(){ PlantName = "TEST tomato" }
+            };
+        }
+
+        public static List<ApplicationUser> GetSeedingUsers()
+        {
+            return new List<ApplicationUser>()
+            {
+                new ApplicationUser() {}
             };
         }
     }
