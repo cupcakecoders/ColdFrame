@@ -50,6 +50,7 @@ namespace ColdFrame
             });
 
             services.AddScoped<IPlantsRepo, PlantsRepo>();
+            services.AddScoped<IPlantUsersRepo, PlantUsersRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -72,7 +72,7 @@ namespace ColdFrameTests
                     Plant = testPlant,
                 }
             };
-            //Look at clearing the db using dispose method.
+
             _applicationDbContext.Plants.RemoveRange(_applicationDbContext.Plants);
             _applicationDbContext.ApplicationUsers.RemoveRange(_applicationDbContext.ApplicationUsers);
 
