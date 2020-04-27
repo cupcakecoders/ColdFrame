@@ -12,7 +12,7 @@ namespace ColdFrame.Repositories
     public interface IPlantUsersRepo
     {
         ICollection<ApplicationUser> GetAllUsersWithPlants();
-        //PlantUser GetUserByIdWithPlants(int id);
+        ApplicationUser GetUserByIdWithPlants(string id);
         //these should probably go in a Application User controller/repo
         //ApplicationUser AddPlantToUser();
         //ApplicationUser DeletePlantFromUser();
@@ -34,12 +34,13 @@ namespace ColdFrame.Repositories
                 .ToList();
         }
         
-        /*public PlantUser GetUserByIdWithPlants(int userId)
+        public ApplicationUser GetUserByIdWithPlants(string id)
         {
-            
+            return _applicationDbContext.ApplicationUsers.Single(A => A.Id == id);
+
         }
 
-        public ApplicationUser AddPlantToUser(int plantId)
+        /*public ApplicationUser AddPlantToUser(int plantId)
         {
             
         }

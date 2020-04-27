@@ -25,5 +25,13 @@ namespace ColdFrame.Controllers
             var plantUserResponses = users.Select(u => new PlantUserResponse(u));
             return plantUserResponses.ToList();
         }
+
+        [HttpGet]
+        [Route("/{id}")]
+        public ActionResult<PlantUserResponse> GetUserWithPlantsById([FromRoute]string id)
+        {
+             var user = _plantUsersRepo.GetUserByIdWithPlants(id);
+             return new PlantUserResponse(user);
+        }
     }
 }
