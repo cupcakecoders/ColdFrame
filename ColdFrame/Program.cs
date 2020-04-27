@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ColdFrame
 {
+    
     public class Program
     {
         public static void Main(string[] args)
@@ -21,6 +22,8 @@ namespace ColdFrame
             host.Run();
         }
 
+
+        
         private static void CreateDatabaseIfNotExists(IHost host)
         {
            using var scope = host.Services.CreateScope();

@@ -1,4 +1,6 @@
-﻿namespace ColdFrame.Models
+﻿using Newtonsoft.Json;
+
+namespace ColdFrame.Models
 {
     public class PlantUser
     {
@@ -6,6 +8,8 @@
         public Plant Plant { get; set; } 
         
         public string Id { get; set; }
+        
+        [JsonIgnore]
         public ApplicationUser ApplicationUser { get; set; }
     }
 }

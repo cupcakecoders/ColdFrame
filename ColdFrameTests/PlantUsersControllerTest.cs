@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,7 +12,7 @@ using NUnit.Framework;
 
 namespace ColdFrameTests
 {
-    public class PlantsControllerTest2
+    public class PlantUsersControllerTest
     {
         private HttpClient _client;
         private CustomWebApplicationFactory<ColdFrame.Startup> _factory;
@@ -37,9 +36,11 @@ namespace ColdFrameTests
         }
         
         [Test]
-        public async Task Create()
+        public async Task GetUserPlants()
         {
             // Arrange
+            _applicationDbContext.Plants.RemoveRange(_applicationDbContext.Plants);
+            _applicationDbContext.ApplicationUsers.RemoveRange(_applicationDbContext.ApplicationUsers);
             var testUser = new ApplicationUser()
             {
                 Id = "100",
@@ -64,7 +65,7 @@ namespace ColdFrameTests
                 ImageUrl = "ImageLink"
             };
 
-            testPlant.PlantUsers = new List<PlantUser>()
+            testUser.PlantUsers = new List<PlantUser>()
             {
                 new PlantUser()
                 {
@@ -72,15 +73,12 @@ namespace ColdFrameTests
                     Plant = testPlant,
                 }
             };
-
-            _applicationDbContext.Plants.RemoveRange(_applicationDbContext.Plants);
-            _applicationDbContext.ApplicationUsers.RemoveRange(_applicationDbContext.ApplicationUsers);
-
-            _applicationDbContext.Plants.Add(testPlant);
+            
+            _applicationDbContext.ApplicationUsers.Add(testUser);
             _applicationDbContext.SaveChanges();
             
             // Act
-            var httpResponse = await _client.GetAsync("/plants");
+            var httpResponse = await _client.GetAsync("/user_plants");
 
             // Assert
             // Must be successful.
@@ -88,8 +86,8 @@ namespace ColdFrameTests
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-            var plants = JsonConvert.DeserializeObject<List<Plant>>(stringResponse);
-            //Assert.AreEqual(plants.Count, 2);
+            var users = JsonConvert.DeserializeObject<List<ApplicationUser>>(stringResponse);
+            Assert.AreEqual(users.Count, 1);
               
         }
     }

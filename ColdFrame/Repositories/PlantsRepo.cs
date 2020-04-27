@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using ColdFrame.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using ColdFrame.Data;
 

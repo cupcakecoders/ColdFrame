@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ColdFrame.Data;
 using ColdFrame.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.CompilerServices;
-
+    
 namespace ColdFrame.Repositories
 {
+    
     public interface IPlantUsersRepo
     {
-        IEnumerable<ApplicationUser> GetAllUsersWithPlants();
+        ICollection<ApplicationUser> GetAllUsersWithPlants();
         //PlantUser GetUserByIdWithPlants(int id);
         //these should probably go in a Application User controller/repo
         //ApplicationUser AddPlantToUser();
@@ -19,17 +21,17 @@ namespace ColdFrame.Repositories
     public class PlantUsersRepo : IPlantUsersRepo
     {
         private readonly ApplicationDbContext _applicationDbContext;
-
         public PlantUsersRepo(ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
 
-        public IEnumerable<ApplicationUser> GetAllUsersWithPlants()
+        public ICollection<ApplicationUser> GetAllUsersWithPlants()
         {
-            
-            return _applicationDbContext.ApplicationUsers;
-            
+            return _applicationDbContext.ApplicationUsers
+                .Include(u => u.PlantUsers)
+                .ThenInclude(p => p.Plant)
+                .ToList();
         }
         
         /*public PlantUser GetUserByIdWithPlants(int userId)

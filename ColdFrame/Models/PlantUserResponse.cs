@@ -1,4 +1,6 @@
-﻿namespace ColdFrame.Models
+﻿using System.Collections.Generic;
+
+namespace ColdFrame.Models
 {
     public class PlantUserResponse
     {
@@ -10,5 +12,6 @@
         }
 
         public string UserName => _applicationUser.UserName;
+        public ICollection<PlantUser> PlantUsers => _applicationUser.PlantUsers;
     }
 }

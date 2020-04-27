@@ -19,10 +19,10 @@ namespace ColdFrame.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult<IEnumerable<PlantUserResponse>> GetAllUsersWithPlants()
+        public ActionResult<List<PlantUserResponse>> GetAllUsersWithPlants()
         {
             var users = _plantUsersRepo.GetAllUsersWithPlants();
-            var plantUserResponses = users.Select(users => new PlantUserResponse(users));
+            var plantUserResponses = users.Select(u => new PlantUserResponse(u));
             return plantUserResponses.ToList();
         }
     }
