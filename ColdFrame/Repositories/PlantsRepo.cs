@@ -87,5 +87,6 @@ namespace ColdFrame.Repositories
             return _applicationDbContext.Plants
                 .SingleOrDefault(plant => plant.PlantName == plantNameQuery);
         }
+        
     }
 }

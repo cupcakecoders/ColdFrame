@@ -13,8 +13,7 @@ namespace ColdFrame.Repositories
     {
         ICollection<ApplicationUser> GetAllUsersWithPlants();
         ApplicationUser GetUserByIdWithPlants(string id);
-        //these should probably go in a Application User controller/repo
-        //ApplicationUser AddPlantToUser();
+        List<PlantUser> AddPlantToUser(string id, int plantId);
         //ApplicationUser DeletePlantFromUser();
     }
     
@@ -36,16 +35,28 @@ namespace ColdFrame.Repositories
         
         public ApplicationUser GetUserByIdWithPlants(string id)
         {
-            return _applicationDbContext.ApplicationUsers.Single(A => A.Id == id);
-
+            return _applicationDbContext.ApplicationUsers
+                .Include(u => u.PlantUsers)
+                .ThenInclude(p => p.Plant)
+                .Single(u => u.Id == id);
         }
 
-        /*public ApplicationUser AddPlantToUser(int plantId)
+        public List<PlantUser> AddPlantToUser(string id, int plantId)
         {
+            var user = _applicationDbContext.ApplicationUsers.Single(u => u.Id == id);
+            var plant = _applicationDbContext.Plants.Single(p => p.PlantId == plantId);
             
+            return new List<PlantUser>()
+            {
+                 new PlantUser()
+                {
+                    ApplicationUser = user,
+                    Plant = plant,
+                }
+            };
         }
 
-        ApplicationUser DeletePlantFromUser(int plantId)
+        /*ApplicationUser DeletePlantFromUser(int plantId)
         {
             
         }*/
