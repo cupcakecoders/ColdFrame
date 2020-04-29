@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ColdFrame.Controllers
 {
     [ApiController]
-    [Route ("/user_plants")]
+    [Route ("/users")]
     public class PlantUsersController : ControllerBase
     {
         private readonly IPlantUsersRepo _plantUsersRepo;
