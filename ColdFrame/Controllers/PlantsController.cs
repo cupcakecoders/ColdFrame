@@ -62,7 +62,6 @@ namespace ColdFrame.Controllers
 
             var plant = _plants.Update(id, update);
             return new PlantResponse(plant);
-            
         }
 
         [HttpDelete]
