@@ -7,11 +7,10 @@ export default class PlantsDropDown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: true
+            isOpen: false
         }
         this.toggleDropdown = this.toggleDropdown.bind(this);
     }
-    
     
     componentDidMount() {
     }
@@ -38,5 +37,4 @@ export default class PlantsDropDown extends React.Component {
             </Dropdown>
         );
     }
-    
 }
