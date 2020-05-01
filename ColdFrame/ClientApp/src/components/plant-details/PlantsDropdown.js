@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import authService from "../api-authorization/AuthorizeService";
+import {Plant} from "../../api-users-plants/UserPlantConstants";
 
 export default class PlantsDropDown extends React.Component {
     
@@ -17,15 +18,13 @@ export default class PlantsDropDown extends React.Component {
     componentDidMount() {
         fetch("https://localhost:5001/plants")
             .then(response => response.json())
-            .then(response => {console.log(response)})
-                    /*.then(data =>
-                        this.setState({
-                            plants: data
-                }))*/
-            .catch(error => {console.log(error)})
+            //.then(response => {console.log(response)})
+            .then(plantsData => {this.setState({plants: plantsData});
+            })
+            .catch(error => {console.log(error)}
+            )
     }
-
-
+    
     toggleDropdown() {
         this.setState({isOpen: !this.state.isOpen})
     }
@@ -38,10 +37,8 @@ export default class PlantsDropDown extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu>
                     <DropdownItem header>Header</DropdownItem>
-                    <DropdownItem>Some Action</DropdownItem>
                     <DropdownItem disabled>Action (disabled)</DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>Foo Action</DropdownItem>
                     <DropdownItem>Bar Action</DropdownItem>
                     <DropdownItem>Quo Action</DropdownItem>
                 </DropdownMenu>
