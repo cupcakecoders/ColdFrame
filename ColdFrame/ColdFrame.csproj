@@ -31,7 +31,7 @@
     <Content Remove="$(SpaRoot)**" />
     <Content Include="ClientApp\src\api-users-plants\FetchUserPlantData.js" />
     <Content Include="ClientApp\src\api-users-plants\UserPlantConstants.js" />
-    <Content Include="ClientApp\src\components\plants-dropdown\plants-dropdown.js" />
+    <Content Include="ClientApp\src\components\plant-details\PlantsDropdown.js" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>

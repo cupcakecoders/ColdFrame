@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PlantsDropDown from './plants-dropdown/plants-dropdown'
-import {AddPlantButton} from "./Plants";
+import PlantsDropDown from './plant-details/PlantsDropdown';
+import {AddPlantButton} from "./plant-details/PlantDetail";
 
 export class Home extends Component {
   static displayName = Home.name;
