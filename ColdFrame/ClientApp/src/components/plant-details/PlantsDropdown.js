@@ -1,7 +1,5 @@
-﻿import React, { Component } from 'react';
+﻿import React from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import authService from "../api-authorization/AuthorizeService";
-import {Plant} from "../../api-users-plants/UserPlantConstants";
 
 export default class PlantsDropDown extends React.Component {
     
@@ -13,12 +11,10 @@ export default class PlantsDropDown extends React.Component {
         }
         this.toggleDropdown = this.toggleDropdown.bind(this);
     }
-
     
     componentDidMount() {
         fetch("https://localhost:5001/plants")
             .then(response => response.json())
-            //.then(response => {console.log(response)})
             .then(plantsData => {this.setState({plants: plantsData});
             })
             .catch(error => {console.log(error)}
@@ -29,18 +25,14 @@ export default class PlantsDropDown extends React.Component {
         this.setState({isOpen: !this.state.isOpen})
     }
     
-    render () {
+    render () { console.log(this.state.plants)
         return (
-            <Dropdown isOpen={this.state.isOpen} toggle={this.toggleDropdown}>
+            <Dropdown isOpen={this.state.isOpen} toggle={this.toggleDropdown} >
                 <DropdownToggle caret>
                     Dropdown
                 </DropdownToggle>
                 <DropdownMenu>
-                    <DropdownItem header>Header</DropdownItem>
-                    <DropdownItem disabled>Action (disabled)</DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>Bar Action</DropdownItem>
-                    <DropdownItem>Quo Action</DropdownItem>
+                    {this.state.plants.map(plant => <DropdownItem>{plant.plantName}</DropdownItem>)}
                 </DropdownMenu>
             </Dropdown>
         );
