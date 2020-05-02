@@ -14,16 +14,6 @@ export class PlantDetails extends Component {
     }
 }
 
-export class DropDownResult extends Component {
-    render() {
-        return (
-            <div>
-                <PlantDetails/>
-            </div>
-        );
-    }
-}
-
 export class AddPlantButton extends Component {
     render() {
         return (
@@ -33,3 +23,16 @@ export class AddPlantButton extends Component {
         );
     }
 }
+
+
+export class PlantCard extends Component {
+    render() {
+        return (
+            <div>
+                <PlantDetails/>
+                <AddPlantButton/>
+            </div>
+        );
+    }
+}
+
