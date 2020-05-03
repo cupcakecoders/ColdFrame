@@ -20,22 +20,21 @@ export class PlantsPage extends Component {
             )
     }
 
-render() { 
-
+render() {
         let plantPhotocard = this.state.plants.map(plant => {
             return (
-                    <PlantPhotocard
-                        plants={plant}
-                    />
+                <Col sm ="4">
+                <PlantPhotocard plants={plant} />
+                </Col>
             )
         })
         return (
             <Container fluid>
                 <Row>
-                    <Col sm ="3">
-                        <PlantsDropDown plantsData={this.state.plants}/>
-                        {plantPhotocard}
-                </Col>
+                    <PlantsDropDown plantsData={this.state.plants}/>
+                </Row>
+                <Row>
+                    {plantPhotocard}
                 </Row>
             </Container>
         );
