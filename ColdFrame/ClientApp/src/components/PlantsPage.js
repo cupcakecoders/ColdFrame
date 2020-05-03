@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
-import {PlantCard} from './plant-details/PlantDetail';
 import PlantsDropDown from "./plant-details/PlantsDropdown";
+import PlantPhotocard from "./plant-details/PlantPhotocard";
+import { Container, Row, Col } from 'reactstrap';
 
 export class PlantsPage extends Component {
     constructor(props) {
@@ -18,17 +19,25 @@ export class PlantsPage extends Component {
             .catch(error => {console.log(error)}
             )
     }
-    
-    render() {
+
+render() { 
+
+        let plantPhotocard = this.state.plants.map(plant => {
+            return (
+                    <PlantPhotocard
+                        plants={plant}
+                    />
+            )
+        })
         return (
-            <div>
-                <PlantsDropDown 
-                    plantsData={this.state.plants}
-                />
-                <PlantCard 
-                    plantsData={this.state.plants}
-                />
-            </div>
+            <Container fluid>
+                <Row>
+                    <Col sm ="3">
+                        <PlantsDropDown plantsData={this.state.plants}/>
+                        {plantPhotocard}
+                </Col>
+                </Row>
+            </Container>
         );
     }
 }

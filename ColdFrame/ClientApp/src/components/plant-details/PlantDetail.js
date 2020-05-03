@@ -26,10 +26,12 @@ export class AddPlantButton extends Component {
 
 
 export class PlantCard extends Component {
+    
     render() {
         return (
             <div>
-                <PlantDetails/>
+                <PlantDetails
+                    {this.props.plantsData}/>
                 <AddPlantButton/>
             </div>
         );

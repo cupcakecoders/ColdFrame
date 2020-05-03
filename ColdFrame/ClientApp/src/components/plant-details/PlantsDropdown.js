@@ -23,9 +23,6 @@ export default class PlantsDropDown extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu>
                     {this.props.plantsData.map(plant => <DropdownItem>{plant.plantName}</DropdownItem>)}
-{/*
-  on select load plant details component pass id as prop to this component. then get plant.description.
-*/}
                 </DropdownMenu>
             </Dropdown>
         );
