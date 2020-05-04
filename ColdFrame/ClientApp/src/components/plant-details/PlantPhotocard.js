@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    CardTitle, Button
 } from 'reactstrap';
 
 export default class PlantPhotocard extends React.Component {
