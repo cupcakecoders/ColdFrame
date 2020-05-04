@@ -22,7 +22,7 @@ export default class App extends Component {
         <Route path='/counter' component={Counter} />
         <Route path='/plants-page' component={PlantsPage} />
         <Route path='/plant/:id' component={Plant} />
-        <Route path='/user/:id' component={Users} />
+        <Route path='/user' component={Users} />
           <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
