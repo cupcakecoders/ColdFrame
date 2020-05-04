@@ -21,12 +21,12 @@ export class Plant extends Component {
             )
     }
     
-    render() { console.log(this.state.plants.plantName)
+    render() {
         return ( 
             <Container fluid>   
                 <Row>    
                     <h1>{this.state.plants.plantName}</h1>
-                    <img src={this.state.plants.imageUrl} />
+                    <img src={this.state.plants.imageUrl} alt="plants" />
                     <p>{this.state.plants.description}</p>
                     <AddPlantButton />
                 </Row>

@@ -9,8 +9,8 @@ import {Plant} from "./components/Plant";
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
-
 import './custom.css'
+import {Users} from "./components/User";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -22,7 +22,8 @@ export default class App extends Component {
         <Route path='/counter' component={Counter} />
         <Route path='/plants-page' component={PlantsPage} />
         <Route path='/plant/:id' component={Plant} />
-        <AuthorizeRoute path='/fetch-data' component={FetchData} />
+        <Route path='/user/:id' component={Users} />
+          <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );

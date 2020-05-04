@@ -5,9 +5,6 @@ import {
 } from 'reactstrap';
 
 export default class PlantPhotocard extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     
     render() {
         return(
