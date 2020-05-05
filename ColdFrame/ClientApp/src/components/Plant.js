@@ -23,11 +23,17 @@ export class Plant extends Component {
     
     render() {
         return ( 
-            <Container fluid>   
+            <Container fluid={true}>   
                 <Row>    
                     <h1>{this.state.plants.plantName}</h1>
-                    <img src={this.state.plants.imageUrl} alt="plants" />
+                </Row>
+                <Row>
+                    <img top width="40%" src={this.state.plants.imageUrl} alt="plants" />
+                </Row>
+                <Row>
                     <p>{this.state.plants.description}</p>
+                </Row>
+                <Row>
                     <AddPlantButton />
                 </Row>
             </Container>

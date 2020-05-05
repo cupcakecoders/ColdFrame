@@ -29,10 +29,10 @@ render() {
             )
         })
         return (
-            <Container fluid>
-                <Row>
+            <Container fluid={true}>
+                {/*<Row>
                     <PlantsDropDown plantsData={this.state.plants}/>
-                </Row>
+                </Row>*/}
                 <Row>
                     {plantPhotocard}
                 </Row>

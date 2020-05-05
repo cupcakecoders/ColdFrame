@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Card, CardBody, Button, CardTitle, CardSubtitle, CardText, CardImg, Col, Container, Row } from 'reactstrap';
 import authService from "./api-authorization/AuthorizeService";
-
 
 export class Users extends Component {
     constructor(props) {
@@ -43,18 +42,34 @@ export class Users extends Component {
 
         
         return (
-            <div>
-                <h1>{this.state.users.userName}</h1>
-                {this.state.users.plantUsers.map(plant => (
-                   <React.Fragment key={plant.plantId}>
-                    <p>{plant.plant.plantName}</p>
-                    <p>{plant.plant.description}</p>,
-                    <img src={`${plant.plant.imageUrl}`}/>
-                   </React.Fragment>
-                ))}
-                <Button href={"https://localhost:5001/plants-page"} color="info">Add more plants</Button>{' '}
-            </div>
-            
+            <Container fluid={true}>
+                <Row>
+                    <Col>
+                        <h1>Hello gardener! </h1><br></br>
+                        <h2>Plants you've chosen to grow.</h2>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col fluid={true} sm={{ size: 6, order: 2, offset: 1 }}>
+                    <Card>
+                            {this.state.users.plantUsers.map(plant => (
+                            <React.Fragment key={plant.plantId}>
+                                <CardImg top width="100%" src={`${plant.plant.imageUrl}`}/>
+                                <CardBody>
+                                <CardTitle>{plant.plant.plantName}</CardTitle>
+                                <CardText>{plant.plant.description}</CardText>
+                                </CardBody>
+                            </React.Fragment>
+                            ))}
+                    </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Button href={"https://localhost:5001/plants-page"} color="info">Add more plants</Button>{' '}
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }
