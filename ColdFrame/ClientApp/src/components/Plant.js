@@ -21,7 +21,7 @@ export class Plant extends Component {
             )
     }
     
-    render() {
+    render() { console.log(this.props)
         return ( 
             <Container fluid={true}>   
                 <Row>    

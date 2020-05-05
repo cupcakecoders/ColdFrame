@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Card, CardBody, Button, CardTitle, CardSubtitle, CardText, CardImg, Col, Container, Row } from 'reactstrap';
 import authService from "./api-authorization/AuthorizeService";
+import {UpdateUserPlants} from "./UpdateUserPlants";
 
 export class Users extends Component {
     constructor(props) {
@@ -15,10 +16,7 @@ export class Users extends Component {
     async componentDidMount() {
         const user = await authService.getUser();
         console.log("user", user)
-/*        this.setState({
-            isAuthenticated,
-            userName: user && user.name
-        });*/
+
         fetch(`https://localhost:5001/users/${user.sub}`)
             .then(response => (response.json()))
             .then(userData => {this.setState({users:userData, loading: false});
