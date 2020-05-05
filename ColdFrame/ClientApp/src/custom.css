@@ -12,3 +12,21 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+footer {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 35px;
+  margin-top: 15px;
+  width: 100%;
+  border-top: 1px solid #dedede;
+}
+
+.media {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+.media-body {
+  margin-left: 10px;
+}

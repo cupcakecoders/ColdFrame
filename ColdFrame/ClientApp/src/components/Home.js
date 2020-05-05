@@ -30,8 +30,7 @@ export class Home extends Component {
             return <Loading />
         }
         return (
-            <Container fluid={true}>
-                <div>
+            <Container style={{minHeight: '100vh'}}>
                 <Row>
                     <Col>
                         <div>
@@ -52,7 +51,6 @@ export class Home extends Component {
                         </div>
                     </Col>
                 </Row>
-                </div>
              </Container>
         );
   }

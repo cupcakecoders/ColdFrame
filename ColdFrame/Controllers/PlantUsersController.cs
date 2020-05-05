@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ColdFrame.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route ("/users")]
     public class PlantUsersController : ControllerBase
