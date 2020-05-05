@@ -10,15 +10,7 @@ export class UpdateUserPlants extends Component {
         const user = await authService.getUser();
         console.log("user", user)
 
-        fetch(`https://localhost:5001/users${user.sub}`, {
-            method: 'PATCH',
-            body: JSON.stringify(),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(json => console.log(json))
+
     }
     
     

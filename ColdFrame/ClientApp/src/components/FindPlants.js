@@ -3,7 +3,7 @@ import PlantsDropDown from "./plant-details/PlantsDropdown";
 import PlantPhotocard from "./plant-details/PlantPhotocard";
 import { Container, Row, Col } from 'reactstrap';
 
-export class PlantsPage extends Component {
+export default class FindPlants extends Component {
     constructor(props) {
         super(props);
         this.state = {

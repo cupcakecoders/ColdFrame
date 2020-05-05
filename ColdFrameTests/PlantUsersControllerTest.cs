@@ -78,7 +78,7 @@ namespace ColdFrameTests
             _applicationDbContext.SaveChanges();
             
             // Act
-            var httpResponse = await _client.GetAsync("/user_plants");
+            var httpResponse = await _client.GetAsync("/users/100");
 
             // Assert
             // Must be successful.
@@ -86,8 +86,8 @@ namespace ColdFrameTests
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-            var users = JsonConvert.DeserializeObject<List<ApplicationUser>>(stringResponse);
-            Assert.AreEqual(users.Count, 1);
+            var user = JsonConvert.DeserializeObject<ApplicationUser>(stringResponse);
+            Assert.AreEqual(user.PlantUsers.First().Plant.PlantName, "Potato");
               
         }
     }

@@ -11,7 +11,14 @@
         returnUrl = query["returnUrl"];
     }
 }
-
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+    .navbar-light .navbar-brand {
+      color: #197f1f;
+      font-family: 'Caveat', cursive;
+      font-size: 28px;
+    }
+</style>
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {

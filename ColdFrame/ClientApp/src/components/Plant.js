@@ -2,36 +2,42 @@
 import Container from "reactstrap/es/Container";
 import Row from "reactstrap/es/Row";
 import {AddPlantButton} from "./plant-details/PlantButton";
+import authService from "./api-authorization/AuthorizeService";
+import {getPlantDetails} from "../api";
+import Loading from "./Loading";
 
 export class Plant extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            plants: []
+    state = {
+        plantDetails: null,
+        loading: true,
+        error: false
+    }
+
+    async componentDidMount() {
+        const user = await authService.getUser();
+        try {
+            const plantDetails = await getPlantDetails(this.props.match.params.id)
+            this.setState({plantDetails, loading: false});
+        } catch (error) {
+            this.setState({loading: false, error});
         }
     }
     
-    componentDidMount() { 
-        
-        fetch(`https://localhost:5001/plants/${this.props.match.params.id}`)
-            .then(response => response.json())
-            .then(plantsData => {this.setState({plants: plantsData});
-            })
-            .catch(error => {console.log(error)}
-            )
-    }
-    
-    render() { console.log(this.props)
+    render() {
+        const plant = this.state.plantDetails;
+        if (this.state.loading) {
+            return <Loading />
+        }
         return ( 
             <Container fluid={true}>   
                 <Row>    
-                    <h1>{this.state.plants.plantName}</h1>
+                    <h1>{plant.plantName}</h1>
                 </Row>
                 <Row>
-                    <img top width="40%" src={this.state.plants.imageUrl} alt="plants" />
+                    <img width="40%" src={plant.imageUrl} alt="plants" />
                 </Row>
                 <Row>
-                    <p>{this.state.plants.description}</p>
+                    <p>{plant.description}</p>
                 </Row>
                 <Row>
                     <AddPlantButton />

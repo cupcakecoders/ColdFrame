@@ -1,0 +1,10 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=97c906b8_002Dddbd_002D45ea_002Dbd14_002Df70f2d82646f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from &amp;lt;ColdFrameTests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="C:\Users\KanDil\Documents\ColdFrameApp\ColdFrameTests" Presentation="&amp;lt;ColdFrameTests&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f3d41873_002D2425_002D48b4_002Dbf25_002D3d2627735bfa/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from PlantUsersControllerTest.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;ProjectFile&gt;C6A978B5-D5E2-4363-BE5A-D37986BBE4EE/f:PlantUsersControllerTest.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;ProjectFile&gt;C6A978B5-D5E2-4363-BE5A-D37986BBE4EE/f:PlantsControllerTest.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

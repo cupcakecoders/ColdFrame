@@ -1,11 +1,12 @@
-﻿.navbar{
-  background-color: #d5ddca;
-}
-
-a.navbar-brand {
+﻿a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+}
+.navbar-light .navbar-brand {
+  color: #197f1f;
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
 }
 
 html {
@@ -18,5 +19,5 @@ html {
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .02);
 }

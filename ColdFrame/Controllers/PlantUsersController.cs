@@ -38,7 +38,7 @@ namespace ColdFrame.Controllers
         }
         
         [HttpPatch] 
-        [Route("{id}/update")]
+        [Route("{id}/add-plant/")]
 
         public ActionResult<List<AddPlantsToUserResponse>> AddPlantToUser([FromRoute]string id, [FromBody]int plantId)
         {
