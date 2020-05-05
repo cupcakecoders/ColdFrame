@@ -38,13 +38,12 @@ namespace ColdFrame.Controllers
         }
         
         [HttpPatch] 
-        [Route("{id}/add-plant/")]
+        [Route("{id}/add-plant/{plantId}")]
 
-        public ActionResult<List<AddPlantsToUserResponse>> AddPlantToUser([FromRoute]string id, [FromBody]int plantId)
+        public ActionResult<List<AddPlantsToUserResponse>> AddPlantToUser([FromRoute]string id, [FromRoute]int plantId)
         {
-            var userPlants = _plantUsersRepo.AddPlantToUser(id, plantId);
-            var plantsToUserResponses = userPlants.Select(u => new AddPlantsToUserResponse(u));
-            return plantsToUserResponses.ToList();
+           _plantUsersRepo.AddPlantToUser(id, plantId);
+           return Ok();
         }
     }
 }

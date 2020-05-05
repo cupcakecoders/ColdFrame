@@ -13,7 +13,7 @@ namespace ColdFrame.Repositories
     {
         ICollection<ApplicationUser> GetAllUsersWithPlants();
         ApplicationUser GetUserByIdWithPlants(string id);
-        List<PlantUser> AddPlantToUser(string id, int plantId);
+        void AddPlantToUser(string id, int plantId);
         //ApplicationUser DeletePlantFromUser();
     }
     
@@ -41,19 +41,17 @@ namespace ColdFrame.Repositories
                 .Single(u => u.Id == id);
         }
 
-        public List<PlantUser> AddPlantToUser(string id, int plantId)
+        public void AddPlantToUser(string id, int plantId)
         {
-            var user = _applicationDbContext.ApplicationUsers.Single(u => u.Id == id);
+            //var user = _applicationDbContext.ApplicationUsers.Single(u => u.Id == id);
+            var user = GetUserByIdWithPlants(id);
             var plant = _applicationDbContext.Plants.Single(p => p.PlantId == plantId);
-            
-            return new List<PlantUser>()
+            user.PlantUsers.Add(new PlantUser()
             {
-                 new PlantUser()
-                {
-                    ApplicationUser = user,
-                    Plant = plant,
-                }
-            };
+                ApplicationUser = user,
+                Plant = plant,
+            });
+            _applicationDbContext.SaveChanges();
         }
 
         /*ApplicationUser DeletePlantFromUser(int plantId)
