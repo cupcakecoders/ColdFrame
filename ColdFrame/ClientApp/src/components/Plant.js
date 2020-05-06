@@ -5,6 +5,7 @@ import {AddPlantButton} from "./plant-details/PlantButton";
 import authService from "./api-authorization/AuthorizeService";
 import {getPlantDetails} from "../api";
 import Loading from "./Loading";
+import Moment from "react-moment";
 
 export class Plant extends Component {
     state = {
@@ -40,6 +41,10 @@ export class Plant extends Component {
                 </Row>
                 <Row>
                     <p>{plant.description}</p>
+                </Row>
+                <Row><p><strong>Sow from:</strong> <Moment format="MMMM">{plant.sowFrom}</Moment> - <strong>Sow to:</strong> <Moment format="MMMM">{plant.sowTo}</Moment></p>
+                </Row>
+                <Row><p><strong>Harvest from:</strong> <Moment format="MMMM">{plant.harvestFrom}</Moment> - <strong>Harvest to:</strong> <Moment format="MMMM">{plant.harvestTo}</Moment></p>
                 </Row>
                 <Row>
                     <AddPlantButton plantId={plant.id} userId={user.sub}/>
